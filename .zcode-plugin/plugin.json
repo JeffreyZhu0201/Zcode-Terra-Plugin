@@ -1,6 +1,6 @@
 {
   "name": "terra-wiki",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Terra Wiki 博客整理助手：把对话蒸馏为通用 Skill 文档、把 Agent 规则文件蒸馏为 Skill 规范、把对话与图片整理为笔记/日记，并上传到 Terra 平台。内置 terra-wiki MCP 服务器。",
   "author": {
     "name": "Jeffrey"
