@@ -6,21 +6,27 @@
 
 ## 目录结构
 
+按 [ZCode 官方插件文档](https://zcode.z.ai/cn/docs/plugin)「开发自己的插件」章节组织：**仓库根即插件根**，同时根级 `marketplace.json` 使整个仓库可直接作为插件市场添加。
+
 ```
-plugins/
-  marketplace.json          # 本地开发市场清单（name: dev-zcode-terra-plugin-e5e5a8bf）
-  terra-wiki/               # 插件源码根（目录名必须与 manifest 的 name 一致）
-    .zcode-plugin/plugin.json   # 插件清单：skills + commands + mcpServers + userConfig
-    skills/wiki-ops/            # 平台操作手册（其他技能共享的约定，改平台行为先改这里）
-    skills/distill-skill/       # 对话 → 通用 SKILL.md 文档
-    skills/distill-rules/       # Agent 规则文件 → 通用 Skill 规范
-    skills/conversation-notes/  # 对话+图片 → 笔记/日记
-    commands/                   # 3 个斜杠命令，每个引用一个技能
-    README.md                   # 配置说明
-scripts/
-  validate-plugin-files.mjs # 文件级校验（本地与 CI 共用）
-.github/workflows/ci.yml   # CI：推送/PR 时跑校验脚本
+Zcode-Terra-Plugin/         # 仓库根 = 插件根 = 市场根
+├── .zcode-plugin/
+│   └── plugin.json         # 插件清单（唯一必需）：skills/commands/userConfig + 元数据
+├── .mcp.json               # MCP 服务声明（标准位置）：terra-wiki HTTP 服务器
+├── skills/
+│   ├── wiki-ops/           # 平台操作手册（其他技能共享的约定，改平台行为先改这里）
+│   ├── distill-skill/      # 对话 → 通用 SKILL.md 文档
+│   ├── distill-rules/      # Agent 规则文件 → 通用 Skill 规范
+│   └── conversation-notes/ # 对话+图片 → 笔记/日记
+├── commands/               # 3 个斜杠命令，每个引用一个技能
+├── marketplace.json        # 市场清单：source "." 指向仓库根的插件
+├── scripts/
+│   └── validate-plugin-files.mjs  # 文件级校验（本地与 CI 共用）
+├── AGENTS.md               # 本文件
+└── .github/workflows/ci.yml # CI：推送/PR 时跑校验脚本
 ```
+
+MCP 声明在根级 `.mcp.json`（官方文档的标准位置），清单 `plugin.json` 不再内联 `mcpServers`；`${user_config.*}` 模板变量在 `.mcp.json` 中同样生效。
 
 ## 常用命令
 
@@ -33,11 +39,11 @@ node scripts/validate-plugin-files.mjs
 
 ## 硬性约束（违反会导致加载失败或校验不通过）
 
-1. `plugin.json` 的 `name` 必须匹配 `^[a-z0-9][a-z0-9._-]{0,127}$` 且与目录名 `plugins/terra-wiki` 一致。
+1. `plugin.json` 的 `name` 必须匹配 `^[a-z0-9][a-z0-9._-]{0,127}$`（仓库根即插件根，无目录名一致性约束）。
 2. 每个 `skills/<name>/SKILL.md` 的 YAML frontmatter 必须含 `name` + `description`；每个 `commands/*.md` 必须含 `description`。
-3. **版本同步**：`plugin.json` 与 `plugins/marketplace.json` 条目的 `version`/`description` 必须一致，改版本时两处同时改。
+3. **版本同步**：根目录的 `plugin.json` 与 `marketplace.json` 条目的 `version`/`description` 必须一致，改版本时两处同时改。
 4. **禁止把密钥写进源码**。Token 通过 `userConfig.api_token` 注入（用户在 ZCode 插件设置里填）。校验脚本会扫描常见 token 格式。
-5. `plugin.json` 里的 `${user_config.server_url}` / `${user_config.api_token}` 是**有意的模板占位符**，由 ZCode 加载时展开，不要替换成字面量。插件提供的 MCP 服务器支持该展开，用户自己写在 `~/.zcode/cli/config.json` 里的 MCP 不支持。
+5. `.mcp.json` 里的 `${user_config.server_url}` / `${user_config.api_token}` 是**有意的模板占位符**，由 ZCode 加载时展开，不要替换成字面量。插件提供的 MCP 服务器支持该展开，用户自己写在 `~/.zcode/cli/config.json` 里的 MCP 不支持。
 6. 校验不通过（`node scripts/validate-plugin-files.mjs` 退出码非零）不要提交。
 
 ## 上游 Terra-Wiki 同步规则（重要）
@@ -68,4 +74,4 @@ node scripts/validate-plugin-files.mjs
 - 本插件提供的 MCP 与用户全局 `~/.zcode/cli/config.json` 里的旧 `terra-wiki` 条目会同时生效、工具重复——文档已引导用户删除全局旧条目，排查"工具出现两次"先想到这里。
 - Terra 的 `create_post` 必须挂**已存在的叶子分类**；`publish_post` 需要带 `can_publish` 权限的 Token，默认 Token 只能建草稿。
 - Terra 全文搜索（`search_posts`）只覆盖已发布内容，查重时要叠加 `list_posts(status: "draft")`。
-- 源码改动不会热加载到已安装的插件：改完源码需要用户在 ZCode 里刷新市场源并更新插件才能生效（开发期用本地市场 `plugins/` 目录）。
+- 源码改动不会热加载到已安装的插件：改完源码需要用户在 ZCode 里刷新市场源并更新插件才能生效（本地市场根 = 仓库根，或直接用 GitHub 仓库地址添加市场）。

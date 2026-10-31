@@ -1,23 +1,25 @@
 {
   "name": "terra-wiki",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Terra Wiki 博客整理助手：把对话蒸馏为通用 Skill 文档、把 Agent 规则文件蒸馏为 Skill 规范、把对话与图片整理为笔记/日记，并上传到 Terra 平台。内置 terra-wiki MCP 服务器。",
   "author": {
     "name": "Jeffrey"
   },
   "license": "MIT",
+  "homepage": "https://github.com/JeffreyZhu0201/Zcode-Terra-Plugin",
+  "repository": "https://github.com/JeffreyZhu0201/Zcode-Terra-Plugin",
+  "keywords": [
+    "zcode",
+    "terra",
+    "wiki",
+    "blog",
+    "mcp",
+    "skills",
+    "notes",
+    "diary"
+  ],
   "skills": "skills",
   "commands": "commands",
-  "mcpServers": {
-    "terra-wiki": {
-      "type": "http",
-      "url": "${user_config.server_url}",
-      "headers": {
-        "Authorization": "Bearer ${user_config.api_token}"
-      },
-      "timeoutMs": 60000
-    }
-  },
   "userConfig": {
     "server_url": {
       "type": "string",

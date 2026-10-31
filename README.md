@@ -117,17 +117,19 @@ diary/
 
 ## 📦 安装
 
-1. **克隆本仓库**
+本仓库根目录即插件根，`marketplace.json` 就放在仓库根——**整个仓库就是一个插件市场**。
+
+1. **添加插件市场**：ZCode 中打开 **插件市场 → 添加 → 添加插件市场**，任选其一：
+   - 🌐 直接粘贴仓库地址 `https://github.com/JeffreyZhu0201/Zcode-Terra-Plugin`
+   - 📁 或本地克隆后粘贴仓库根目录路径
 
    ```bash
    git clone https://github.com/JeffreyZhu0201/Zcode-Terra-Plugin.git
    ```
 
-2. **添加本地插件市场**：ZCode 中打开 **插件市场 → 添加 → 添加插件市场**，粘贴本仓库的 `plugins/` 目录路径
+2. **安装插件**：到 **个人** 页，安装 **Terra Wiki 博客助手**
 
-3. **安装插件**：到 **个人** 页，安装 **Terra Wiki 博客助手**
-
-4. **配置**：在 **设置 → 插件 → terra-wiki** 中填写
+3. **配置**：在 **设置 → 插件 → terra-wiki** 中填写
    - **Terra MCP 服务地址**：默认 `http://localhost:3000/api/mcp`
    - **Terra API Token**：在 Terra 后台签发（默认 Token 只能建草稿；发布需 `can_publish` 权限）
 
