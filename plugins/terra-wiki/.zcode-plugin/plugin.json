@@ -1,0 +1,35 @@
+{
+  "name": "terra-wiki",
+  "version": "0.1.0",
+  "description": "Terra Wiki 博客整理助手：把对话蒸馏为通用 Skill 文档、把 Agent 规则文件蒸馏为 Skill 规范、把对话与图片整理为笔记/日记，并上传到 Terra 平台。内置 terra-wiki MCP 服务器。",
+  "author": {
+    "name": "Jeffrey"
+  },
+  "license": "MIT",
+  "skills": "skills",
+  "commands": "commands",
+  "mcpServers": {
+    "terra-wiki": {
+      "type": "http",
+      "url": "${user_config.server_url}",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_token}"
+      },
+      "timeoutMs": 60000
+    }
+  },
+  "userConfig": {
+    "server_url": {
+      "type": "string",
+      "title": "Terra MCP 服务地址",
+      "default": "http://localhost:3000/api/mcp",
+      "description": "Terra Wiki 实例的 MCP HTTP 端点，默认为本机 3000 端口。"
+    },
+    "api_token": {
+      "type": "string",
+      "title": "Terra API Token",
+      "default": "",
+      "description": "在 Terra 后台签发的访问令牌（以 Bearer 方式携带）。默认 Token 没有发布权限，只能创建草稿；需要发布请签发带 can_publish 权限的 Token。该值保存在本机插件配置中。"
+    }
+  }
+}
