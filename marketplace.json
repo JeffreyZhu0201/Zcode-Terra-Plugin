@@ -1,10 +1,12 @@
 {
-  "name": "dev-zcode-terra-plugin-e5e5a8bf",
+  "name": "zcode-terra-plugin",
+  "description": "terra-wiki 插件的官方市场：本仓库即插件根，直接添加本仓库即可安装。",
+  "pluginRoot": ".",
   "plugins": [
     {
       "name": "terra-wiki",
-      "source": "./terra-wiki",
-      "version": "0.1.0",
+      "source": ".",
+      "version": "0.1.1",
       "description": "Terra Wiki 博客整理助手：把对话蒸馏为通用 Skill 文档、把 Agent 规则文件蒸馏为 Skill 规范、把对话与图片整理为笔记/日记，并上传到 Terra 平台。内置 terra-wiki MCP 服务器。",
       "displayName": "Terra Wiki 博客助手",
       "displayName_i18n": {
@@ -12,7 +14,9 @@
       },
       "description_i18n": {
         "zh-CN": "把对话蒸馏为通用 Skill 文档、把 Agent 规则文件蒸馏为 Skill 规范、把对话与图片整理为笔记/日记并上传 Terra 平台；内置 terra-wiki MCP 服务器。"
-      }
+      },
+      "category": "productivity",
+      "tags": ["blog", "mcp", "skills", "diary"]
     }
   ]
 }

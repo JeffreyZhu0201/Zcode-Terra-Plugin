@@ -32,12 +32,12 @@ main (protected, CI 必须绿)
 
 ### 改动即版本变更
 
-只要动了 `plugins/terra-wiki/` 下的内容，就按语义化版本 bump，且 **两处清单必须同步**：
+只要动了插件内容（`.zcode-plugin/`、`skills/`、`commands/`、`.mcp.json`），就按语义化版本 bump，且 **两处清单必须同步**：
 
 | 文件 | 字段 |
 | --- | --- |
-| `plugins/terra-wiki/.zcode-plugin/plugin.json` | `version` |
-| `plugins/marketplace.json` | 对应条目的 `version` |
+| `.zcode-plugin/plugin.json` | `version` |
+| `marketplace.json` | 对应条目的 `version` |
 
 - 🩹 `patch`：措辞、格式、文档修正
 - ✨ `minor`：新增技能/命令/配置项、新增上游工具支持说明
