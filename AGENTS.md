@@ -15,6 +15,7 @@ Zcode-Terra-Plugin/         # 仓库根 = 插件根 = 市场根
 ├── .mcp.json               # MCP 服务声明（标准位置）：terra-wiki HTTP 服务器
 ├── skills/
 │   ├── wiki-ops/           # 平台操作手册（其他技能共享的约定，改平台行为先改这里）
+│   ├── wiki-doctor/        # 自诊断：安装/配置/连通性检查与修复指引
 │   ├── distill-skill/      # 对话 → 通用 SKILL.md 文档
 │   ├── distill-rules/      # Agent 规则文件 → 通用 Skill 规范
 │   └── conversation-notes/ # 对话+图片 → 笔记/日记
