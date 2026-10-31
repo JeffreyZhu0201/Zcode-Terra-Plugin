@@ -129,7 +129,11 @@ diary/
 
 2. **安装插件**：到 **个人** 页，安装 **Terra Wiki 博客助手**
 
-3. **配置**：在 **设置 → 插件 → terra-wiki** 中填写
+3. **配置**：**设置 → 插件** → 点开 **terra-wiki** 卡片进详情，展开底部 **高级信息**，在 **配置** 区填写：
+   - **Terra MCP 服务地址**：默认 `http://localhost:3000/api/mcp`
+   - **Terra API Token**：在 Terra 后台签发（默认 Token 只能建草稿；发布需 `can_publish` 权限）
+
+   填完点 **保存配置**，配置值会注入 `.mcp.json` 中的 `${user_config.*}` 占位符。
    - **Terra MCP 服务地址**：默认 `http://localhost:3000/api/mcp`
    - **Terra API Token**：在 Terra 后台签发（默认 Token 只能建草稿；发布需 `can_publish` 权限）
 

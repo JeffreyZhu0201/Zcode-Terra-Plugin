@@ -71,6 +71,7 @@ node scripts/validate-plugin-files.mjs
 
 ## 已知坑
 
+- **`api_token` 不要标 `sensitive`**：官方文档确认 sensitive 配置项当前无法在 UI 填写（提示"需要安全存储接入"），标了用户就配不了 Token。保持普通 string。
 - 本插件提供的 MCP 与用户全局 `~/.zcode/cli/config.json` 里的旧 `terra-wiki` 条目会同时生效、工具重复——文档已引导用户删除全局旧条目，排查"工具出现两次"先想到这里。
 - Terra 的 `create_post` 必须挂**已存在的叶子分类**；`publish_post` 需要带 `can_publish` 权限的 Token，默认 Token 只能建草稿。
 - Terra 全文搜索（`search_posts`）只覆盖已发布内容，查重时要叠加 `list_posts(status: "draft")`。
